@@ -23,7 +23,7 @@ void UOpenDoor::BeginPlay()
 
 	AActor* Owner = GetOwner();
 	FRotator OwnersRotation = Owner->GetActorRotation();
-	OwnersRotation.Yaw = 60.0f;
+	OwnersRotation.Yaw = OwnersRotation.Yaw + 60.0f;
 	Owner->SetActorRotation(OwnersRotation, ETeleportType::None);	
 }
 
