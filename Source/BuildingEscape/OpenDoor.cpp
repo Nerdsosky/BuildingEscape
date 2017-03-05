@@ -19,7 +19,8 @@ UOpenDoor::UOpenDoor()
 // Called when the game starts
 void UOpenDoor::BeginPlay()
 {
-	Super::BeginPlay();		
+	Super::BeginPlay();	
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 // Called every frame
@@ -41,7 +42,7 @@ void UOpenDoor::OpenDoor()
 	{
 		AActor* Owner = GetOwner();
 		FRotator OwnersRotation = Owner->GetActorRotation();
-		OwnersRotation.Yaw = OwnersRotation.Yaw + 60.0f;
+		OwnersRotation.Yaw = OwnersRotation.Yaw + AmountToOpen;
 		Owner->SetActorRotation(OwnersRotation, ETeleportType::None);
 		bIsOpen = true;
 	}

@@ -30,8 +30,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;	
 
-	UPROPERTY(EditAnywhere)
 	AActor* ActorThatOpens;  //Pawn inherits from Actor
 
-	bool bIsOpen = false;	
+	bool bIsOpen = false;
+
+	UPROPERTY(EditAnywhere)
+	float AmountToOpen = 0.f;	
 };
