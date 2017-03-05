@@ -19,20 +19,30 @@ UOpenDoor::UOpenDoor()
 // Called when the game starts
 void UOpenDoor::BeginPlay()
 {
-	Super::BeginPlay();
-
-	AActor* Owner = GetOwner();
-	FRotator OwnersRotation = Owner->GetActorRotation();
-	OwnersRotation.Yaw = OwnersRotation.Yaw + 60.0f;
-	Owner->SetActorRotation(OwnersRotation, ETeleportType::None);	
+	Super::BeginPlay();		
 }
-
 
 // Called every frame
 void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
-	// ...
+	//Poll trigger volume every frame to detect when something overlaps
+	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
+	{
+		OpenDoor();
+	}		
 }
 
+//Opens the door if it is not already open
+void UOpenDoor::OpenDoor()
+{
+	if (!bIsOpen)
+	{
+		AActor* Owner = GetOwner();
+		FRotator OwnersRotation = Owner->GetActorRotation();
+		OwnersRotation.Yaw = OwnersRotation.Yaw + 60.0f;
+		Owner->SetActorRotation(OwnersRotation, ETeleportType::None);
+		bIsOpen = true;
+	}
+}
